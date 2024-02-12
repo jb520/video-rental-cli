@@ -2,8 +2,21 @@ require_relative 'movie'
 
 class Video_rental
   def initialize
-    @movies = []
+    default_movie_list = []
+    @movies = default_movie_list
     @rented = []
+
+    default_movie_list.push(Movie.new("Mission Impossible", "Action"))
+    default_movie_list.push(Movie.new("Terminator", "Action"))
+    default_movie_list.push(Movie.new("Napoleon Dynamite", "Comedy"))
+    default_movie_list.push(Movie.new("Superbad", "Comedy"))
+    default_movie_list.push(Movie.new("Hereditary", "Horror"))
+    default_movie_list.push(Movie.new("Incantation", "Horror"))
+    default_movie_list.push(Movie.new("Nightcrawler", "Thriller"))
+    default_movie_list.push(Movie.new("Se7en", "Thriller"))
+
+  
+
   end
 
   def run
@@ -39,14 +52,34 @@ class Video_rental
 
   private
 
+  def find_movie(name)
+    @movies.find { |movie| movie.title == name}
+  end
+
   def rent_movie
-    #take movie from movies and put it in rented
-    puts "nothing here yet"
+    #take movie title from movies and put it in rented array
+    print "Which Movie would you like? "
+    choice = gets.chomp
+
+    movie_search = find_movie(choice)
+
+    if movie_search
+      @rented.push(movie_search.title)
+      puts "Enjoy your Movie!"
+    else
+      puts "I don't think we have that one. :("
+    end
+
   end
 
   def return_movie
-    #take movie from rented and put it in movies
-    puts "nothing here yet"
+    #remove title from rented array
+    print "What would you like to return? "
+    
+    give_back = gets.chomp
+    @rented.delete(give_back)
+
+    puts "#{give_back} has been returned!"
   end
 
   def list_movies
@@ -69,7 +102,3 @@ class Video_rental
     end
   end
 end
-  
-
-
-      
