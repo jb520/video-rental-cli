@@ -47,6 +47,7 @@ class Video_Rental
   def list_movies
     #list all movies in movies
   end
+end
   
 
 
