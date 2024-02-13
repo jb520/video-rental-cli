@@ -56,6 +56,10 @@ class Video_rental
     @movies.find { |movie| movie.title == name}
   end
 
+  def find_rented_movie(name)
+    @rented.find { |movie| movie == name}
+  end
+
   def rent_movie
     #take movie title from movies and put it in rented array
     print "Which Movie would you like? "
@@ -75,11 +79,15 @@ class Video_rental
   def return_movie
     #remove title from rented array
     print "What would you like to return? "
-    
     give_back = gets.chomp
-    @rented.delete(give_back)
+    check_rented = find_rented_movie(give_back)
 
-    puts "#{give_back} has been returned!"
+    if check_rented
+      @rented.delete(give_back)
+      puts "#{give_back} has been returned!"
+    else
+      puts "You haven't rented that movie."
+    end
   end
 
   def list_movies
